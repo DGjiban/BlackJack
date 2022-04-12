@@ -67,13 +67,7 @@ public class DeckClass {
     public void clearDeck(){
         deck.clear();
     }
-    
-    /*public void restartDeck(DeckClass empty){
-        this.addCards(empty.getCards());
-        shuffleDeck();
-        empty.clearDeck();
-    }*/
-    
+        
     @Override
     public String toString(){
         String displayDeck = "";

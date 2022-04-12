@@ -12,12 +12,15 @@ import java.util.ArrayList;
  */
 public class HandClass {
 
+    //Atributes
     ArrayList<CardsClass> hand;
 
+    //Contructor
     public HandClass(){
         hand = new ArrayList<CardsClass>();
     }
     
+    //Draw from deck
     public void drawDeck(DeckClass deck){
         hand.add(deck.draw());
     }
@@ -26,7 +29,7 @@ public class HandClass {
     public int getValueHand(){
         int number = 0, ace =0;
          
-    //For statement to sum the card values
+        //For statement to sum the card values
         for (CardsClass card: hand){
             switch (card.getNumbers()){
                 case ACE: ace++; break;
@@ -54,10 +57,12 @@ public class HandClass {
             return number;
         }
     
+    //get a card
     public CardsClass getCard(int i){
         return hand.get(i);
     }
     
+    //to string output
     @Override
     public String toString(){
         String output = "";

@@ -21,27 +21,32 @@ public class HumanClass extends PlayersClass {
         super.setName("Player");
     }
     
-   public void choice(DeckClass deck){
-        String choice = null;
-        boolean answer = true;
+public boolean choice(){
+    String choice = null;
+    boolean answer = true, check = true;
 
-        while(answer){
-
-            try{
-                System.out.println("What would you like to do? Draw or Stand");
-                choice = input.nextLine();
+    while(check){
+        try{
+            System.out.println("What would you like to do? Draw or Stand");
+            choice = input.nextLine();
+            
+            if(choice.equalsIgnoreCase("draw")){
+                answer = true;
+                check = false;
+            }else if(choice.equalsIgnoreCase("stand")){
                 answer = false;
-
+                check = false;
+            }else{
+                System.out.println("Wrong choice, try again.");
             }
-            catch(Exception e){
-                System.out.println("Invalid");
-                input.next();
-            }
-        }
-        
-        System.out.println("You selected: " + choice);
-
+            
+        }catch(Exception e){
+            System.out.println("Wrong choice, try again.");
+            input.next();
+        }   
     }
+    return answer;
+}
    
     
 

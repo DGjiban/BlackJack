@@ -13,7 +13,7 @@ public class DealerClass extends PlayersClass{
     public DealerClass(){
         super.setName("Dealer");
     }
-    
+        
     public void dealerHand(){
         System.out.println("Dealer hand is:");
         System.out.println(super.getHand().getCard(0));
