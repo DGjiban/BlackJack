@@ -20,7 +20,8 @@ public abstract class PlayersClass {
         this.name = "";
     }
     
-    public boolean blackGackGG(){
+    //check black jack
+    public boolean blackJackGG(){
     
         if(this.getHand().getValueHand() == 21){
             return true;
@@ -28,33 +29,17 @@ public abstract class PlayersClass {
             return false;
         }
     }
-    
-    public void draw1(DeckClass deck, DeckClass emptyDeck){
-        //If there's no cards left in the deck
-        this.hand.drawDeck(deck);
-        this.displayHand();
-    }
 
     //Getters and Setters
-    public HandClass getHand() {
-        return hand;
-    }
-
-    public void setHand(HandClass hand) {
-        this.hand = hand;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public HandClass getHand() {return hand;}
+    public void setHand(HandClass hand) {this.hand = hand;}
+    public String getName() {return name;}
+    public void setName(String name) {this.name = name;}
     
+    //display the hand
     public void displayHand(){
-        System.out.println(getName() + "hand is :");
-        System.out.println(getHand() + " Value =  " + getHand().getValueHand());
+        System.out.println(getName() + " hand is :");
+        System.out.println(getHand() + " The hand Value is =  " + getHand().getValueHand());
     }
     
 }

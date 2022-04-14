@@ -18,55 +18,60 @@ public class GameClass {
     private HumanClass human;
     private double money;
     private double bet;
-   
+       
     //contructor
     public GameClass(){
-            
-        //Create the Players
+        
+        //Scanner object
+        Scanner input = new Scanner(System.in);        
+   
+        //Create the Objects
         dealer = new DealerClass();
         human = new HumanClass();
-        
-        //Create and shuflle new deck 
-        deck.createDeck();
-        deck.shuffleDeck();
-            
+        deck = new DeckClass();
+                  
         //initializing variables
         money = 150.0;
         bet = 0;
-
+        
+        //Meeting the player
+        System.out.println("Welcome to the classic Black Jack Game! \nWhat is your name?");
+        human.setName(input.nextLine());
+        System.out.println("Nice to meet you " + human.getName());
+        
         //Start the first round
         startGame();
     }
         
     //Main game method
     private void startGame(){
+              
+        //Scanner object
+        Scanner input = new Scanner(System.in);
         
-        //Create and shuflle new deck 
-        deck.createDeck();
-        deck.shuffleDeck();
-        
-        //check the player money
-        if(money<0){
-            //kind message to exit
-            System.out.println("Sorry you lost the whole money, see you");
-            System.exit(0);
-        
-        }else{
-                   
+        //While loop to run until player lost the whole money 
+        while(money>0){
+            
+            //Cleanning deck and hands
+            deck.clearDeck();
+            dealer.getHand().clearHand();
+            human.getHand().clearHand();
+            
             //Create and shuflle new deck 
             deck.createDeck();
             deck.shuffleDeck();
         
-            //Scanner object
-            Scanner input = new Scanner(System.in);
-        
-            //Meeting the player
-            System.out.println("Welcome to the classic Black Jack Game! \n What is your name?");
-            human.setName(input.nextLine());
-        
             //Asking for a bet
-            System.out.println("Nice to meet you " + human.getName() + "you have " + money + "\n How much do you wanna bet?");
-            bet = input.nextDouble();
+            while(true){
+                try{
+                    System.out.println("You have $" + money + "\nHow much do you wanna bet?");
+                    bet = input.nextDouble();
+                    break;
+                }catch(Exception e){
+                    System.out.println("Wrong input, please try again!");
+                    input.next();
+                }
+            }        
         
             //checking the bet
             while(bet>money){
@@ -75,7 +80,8 @@ public class GameClass {
                 bet = input.nextDouble();
             }
             
-            System.out.println("Your bet was $" + bet + "Let's play!!");
+            //display the bet
+            System.out.println("Your bet was $" + bet + "\n ...Let's play!!...");
         
             //Dealer draw 2
             System.out.println("Dealer is drawing 2 cards......");
@@ -91,77 +97,84 @@ public class GameClass {
             dealer.dealerHand();
             human.displayHand();    
     
-            boolean dealerBJ = dealer.blackGackGG();
-            boolean humanBJ = dealer.blackGackGG();
+            //Check about blackJack
+            boolean dealerBJ = dealer.blackJackGG();
+            boolean humanBJ = human.blackJackGG();
     
             //Check if dealer has BlackJack
             if(dealerBJ){
         
-                //Show the dealer has BlackJack
-                dealer.dealerHand();
-
-                //Check if the player also has BlackJack
+                //Check if the player has BlackJack together the dealer
                 if(humanBJ){
-                    //End the round with a push
-                    System.out.println("You both have 21, Draw");
-                    money += bet;
+                    System.out.println("You both have 21, Tie");
                     startGame();
+                    
                 }else{
                     System.out.println("Dealer has BlackJack. You lose.");
+                    
+                    //Reduce the money according to bet
                     money -= bet;
-                    dealer.dealerHand();
-                    deck.clearDeck();
+                    
+                    //Display the dealer hand
+                    dealer.displayHand();
+                    
                     startGame();
                 }
             }
 
-            //Check if human player has blackjack
+            //Check if player player has blackjack
             if(humanBJ){
                 System.out.println("Blackjack! You win!");
-                money = money+bet;
+                
+                //Increase the money according to bet
+                money += bet;
+                
                 startGame();
             }
         
+            //Ask player if want to stand or draw a card
             while(human.choice()){
                 human.getHand().drawDeck(deck);
                 human.displayHand(); 
             }
             
+            //checking if the dealer has less than 15 points in its hand
             while(dealer.getHand().getValueHand()<15){
                 System.out.println("Dealer will hit a card");
                 dealer.getHand().drawDeck(deck);
             }           
                     
-            //Check player human value is more than 21
+            //Check if the player value is more than 21
             if(human.getHand().getValueHand()> 21){
-                System.out.println("You have gone over 21. You lose :(");
-                money = money-bet;
+                System.out.println("You have more than 21. You lose :(");
+                money -= bet;
                 startGame();
             }
             
             //Check who wins
             if(dealer.getHand().getValueHand()>21){
                 System.out.println("Dealer busts, you win :)");
-                money = money+bet;
+                money += bet;
             
             }else if(dealer.getHand().getValueHand() > human.getHand().getValueHand()){
                 System.out.println("You lose. :(");
-                money = money-bet;
+                money -= bet;
             
             }else if(human.getHand().getValueHand() > dealer.getHand().getValueHand()){
                 System.out.println("You win. :)");
-                money = money+bet;
+                money += bet;
             
             }else{
-                System.out.println("Push.");
+                System.out.println("Push!!!");
             }
-
-            //Cleanning the deck
-            deck.clearDeck();
-            
+ 
             //Start a new round
             startGame();         
                         
         }
+         
+        //Kind message to exit
+        System.out.println("Sorry you lost the whole money, see you");
+        System.exit(0);
     }
 }

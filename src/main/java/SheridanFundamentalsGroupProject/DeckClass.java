@@ -21,6 +21,7 @@ public class DeckClass {
         deck = new ArrayList<>();
     }
     
+    //Method to create the deck
     public void createDeck(){
         
         //Nested collections Loop to get the suit and number to create the deck
@@ -33,49 +34,31 @@ public class DeckClass {
         }
     }
     
+    //Shuffle deck  
     public void shuffleDeck(){
         Collections.shuffle(deck);
     }
     
+    //Method to draw a card
     public CardsClass draw(){
 
-        //catch the first card from the deck
+        //Taking the first card from the deck
         CardsClass card = new CardsClass(deck.get(0));
         
-
         //Remove card from the deck
         deck.remove(0);
         
-        //return the card
         return card;
-
     }
     
+    //Method to add cards in the array
     public void addCards(ArrayList<CardsClass> cards){
         deck.addAll(cards);
     }
     
-    public boolean cardsHand(){
-        if (deck.size()>0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    
+    //Method to clear the deck
     public void clearDeck(){
         deck.clear();
     }
-        
-    @Override
-    public String toString(){
-        String displayDeck = "";
-           
-        for(CardsClass card: deck){
-            displayDeck += card.toString() + "\n";
-        }
-        return displayDeck;
-    } 
 }
 

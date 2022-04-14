@@ -29,7 +29,7 @@ public class HandClass {
     public int getValueHand(){
         int number = 0, ace =0;
          
-        //For statement to sum the card values
+        //For loop statement to sum the card values
         for (CardsClass card: hand){
             switch (card.getNumbers()){
                 case ACE: ace++; break;
@@ -57,12 +57,17 @@ public class HandClass {
             return number;
         }
     
-    //get a card
+    //Get a card
     public CardsClass getCard(int i){
         return hand.get(i);
     }
     
-    //to string output
+    //Clear hand
+    public void clearHand(){
+        hand.clear();
+    }
+    
+    //String output
     @Override
     public String toString(){
         String output = "";

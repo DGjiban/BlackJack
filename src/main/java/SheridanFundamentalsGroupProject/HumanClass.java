@@ -17,19 +17,24 @@ public class HumanClass extends PlayersClass {
     
     //Create a new Player
     public HumanClass() {
-
         super.setName("Player");
     }
     
+//Ask the player if draw os stand the hand    
 public boolean choice(){
+    
+    //Variables
     String choice = null;
     boolean answer = true, check = true;
 
+    //While statement to check the player answer
     while(check){
         try{
+            //Asking the user
             System.out.println("What would you like to do? Draw or Stand");
             choice = input.nextLine();
             
+            //Checking the answer
             if(choice.equalsIgnoreCase("draw")){
                 answer = true;
                 check = false;
