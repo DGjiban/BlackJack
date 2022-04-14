@@ -16,6 +16,7 @@ public class GameClass {
     private DeckClass deck;
     private DealerClass dealer;
     private HumanClass human;
+    
     private double money;
     private double bet;
        
@@ -25,7 +26,7 @@ public class GameClass {
         //Scanner object
         Scanner input = new Scanner(System.in);        
    
-        //Create the Objects
+        //Create the Objects constructor
         dealer = new DealerClass();
         human = new HumanClass();
         deck = new DeckClass();

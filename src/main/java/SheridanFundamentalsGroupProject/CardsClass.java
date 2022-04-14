@@ -32,15 +32,9 @@ public class CardsClass {
         this.numbers = card.getNumbers();
     }   
     
-    //Accessor method to return the number value
-    public Numbers getNumbers(){
-        return this.numbers;
-    }
-    
-    //Accessor method to return the suit value
-    public Suits getSuits(){
-        return this.suits;
-    }
+    //Getters methods
+    public Numbers getNumbers(){return this.numbers;}
+    public Suits getSuits(){return this.suits;}
         
     //ToString method to return the complete card
     @Override
